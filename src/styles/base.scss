@@ -1,0 +1,15 @@
+@import '@/styles/variables.scss';
+
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+
+body {
+  color: $text-base-color;
+  font-size: $font-size-base;
+  font-family: $font-family;
+  background-color: $light-gray;
+}
