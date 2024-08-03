@@ -4,8 +4,9 @@
       <div class="header-container">
         <h1>Events</h1>
         <div class="actions">
-          <input type="text" placeholder="Search events..." />
-          <button>Create new event</button>
+          <!-- <input type="text" placeholder="Search events..." /> -->
+          <InputText placeholder="Search 9 events..." />
+          <Button>Create new event</Button>
         </div>
       </div>
     </header>
@@ -18,6 +19,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import EventCard from '@/components/EventCard.vue'
+import InputText from '@/components/shared/ui/InputText.vue'
+import Button from '@/components/shared/ui/Button.vue'
 
 interface Event {
   id: number
@@ -80,30 +83,6 @@ const events = ref<Event[]>([
     title: 'Beyond the Valley 2014',
     date: 'Melbourne, Sat 29th Jan 2014',
     image: '/src/assets/event-image.png'
-  },
-  {
-    id: 10,
-    title: 'Beyond the Valley 2013',
-    date: 'Melbourne, Sat 29th Jan 2013',
-    image: '/src/assets/event-image.png'
-  },
-  {
-    id: 11,
-    title: 'Beyond the Valley 2012',
-    date: 'Melbourne, Sat 29th Jan 2012',
-    image: '/src/assets/event-image.png'
-  },
-  {
-    id: 12,
-    title: 'Beyond the Valley 2011',
-    date: 'Melbourne, Sat 29th Jan 2011',
-    image: '/src/assets/event-image.png'
-  },
-  {
-    id: 13,
-    title: 'Beyond the Valley 2010',
-    date: 'Melbourne, Sat 29th Jan 2010',
-    image: '/src/assets/event-image.png'
   }
 ])
 </script>
@@ -113,22 +92,17 @@ const events = ref<Event[]>([
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  padding-left: 70px;
-  padding-right: 70px;
+  margin-left: 70px;
+  margin-right: 70px;
+  border-bottom: 1px solid #979797;
+  padding-bottom: 33px;
+  padding-top: 42px;
 }
 
 .actions {
   display: flex;
-  align-items: center;
+  align-content: baseline;
 
-  input {
-    margin-right: 10px;
-    padding: 5px;
-  }
-
-  button {
-    padding: 5px 10px;
-  }
 }
 
 h1 {
@@ -141,5 +115,19 @@ h1 {
   gap: 45px;
   flex-wrap: wrap;
   justify-content: center;
+  padding-top: 33px;
+  padding-bottom: 42px
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 26px;
+  }
+
+  .actions {
+    width: 100%;
+  }
 }
 </style>
