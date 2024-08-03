@@ -1,13 +1,11 @@
 <script setup lang="ts">
-import EventsView from './views/EventsView.vue';
+import EventsView from './views/EventsView.vue'
 </script>
 
 <template>
   <main>
-    <EventsView/>
-  
+    <EventsView />
   </main>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
