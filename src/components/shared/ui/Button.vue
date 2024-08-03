@@ -1,6 +1,6 @@
 <template>
   <button class="custom-button">
-    <TargetIcon />
+    <TargetIcon class="button-icon" />
     <div>
       <slot></slot>
     </div>
@@ -28,9 +28,21 @@ defineProps<{}>()
   border-radius: 3px;
   gap: 10px;
   align-items: center;
+  display: flex;
+
 
   &:hover {
     background-color: $secondary-color;
+  }
+}
+
+@media (max-width: 768px) {
+  .button-icon {
+    display: none;
+  }
+
+  .desktop {
+    display: none;
   }
 }
 </style>

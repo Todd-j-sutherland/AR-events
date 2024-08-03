@@ -6,7 +6,7 @@
         <div class="actions">
           <!-- <input type="text" placeholder="Search events..." /> -->
           <InputText placeholder="Search 9 events..." />
-          <Button>Create new event</Button>
+          <Button><span>Create</span> <span class="desktop">new event</span></Button>
         </div>
       </div>
     </header>
@@ -124,10 +124,23 @@ h1 {
     flex-direction: column;
     align-items: flex-start;
     gap: 26px;
+    margin-left: 35px;
+    margin-right: 35px;
+
   }
 
   .actions {
     width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .button-icon {
+    display: none;
+  }
+
+  .desktop {
+    display: none;
   }
 }
 </style>

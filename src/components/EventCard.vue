@@ -36,7 +36,7 @@
 import { ref } from 'vue'
 import Icon from './icon.svg'
 
-const props = defineProps<{
+defineProps<{
   title: string
   date: string
   image: string
@@ -45,17 +45,9 @@ const props = defineProps<{
 const isHovering = ref(false)
 const isMenuVisible = ref(false)
 
-const showHover = () => {
-  isHovering.value = true
-}
-
-const hideHover = () => {
-  isHovering.value = false
-}
-
-const toggleMenu = () => {
-  isMenuVisible.value = !isMenuVisible.value
-}
+const showHover = () => isHovering.value = true
+const hideHover = () => isHovering.value = false
+const toggleMenu = () => isMenuVisible.value = !isMenuVisible.value
 </script>
 
 <style scoped lang="scss">
@@ -63,79 +55,57 @@ const toggleMenu = () => {
   width: 380px;
   border: 1px solid #dcdee4;
   border-radius: 4px;
-  // overflow: hidden;
-  transition: transform 0.2s;
-
+  transition: transform 0.2s, box-shadow 0.2s;
   position: relative;
 
   &:hover {
     box-shadow: 2px 0px 40px 0px rgba(0, 0, 0, 0.2);
   }
+}
 
-  .event-image-container {
-    position: relative;
-    border-bottom: 1px solid #666666;
+.event-image-container {
+  position: relative;
+  border-bottom: 1px solid #666666;
+  display: flex;
+
+  .event-image {
+    width: 100%;
+    height: auto;
+  }
+
+  .hover-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.9);
     display: flex;
+    justify-content: center;
+    align-items: center;
 
-    .event-image {
-      width: 100%;
-      height: auto;
-    }
-
-    .hover-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.9);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      .hover-button {
-        background: none;
-        border: 1px solid white;
-        color: white;
-        padding: 10px 20px;
-        font-size: 16px;
-        cursor: pointer;
-        transition:
-          background-color 0.3s,
-          color 0.3s;
-
-        &:hover {
-          background-color: white;
-          color: black;
-        }
-      }
-    }
-  }
-
-  .menu-icon {
-    .menu-icon-toggle {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 4px;
-      height: 16px;
+    .hover-button {
+      background: none;
+      border: 1px solid white;
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
       cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
 
-      .dot {
-        width: 4px;
-        height: 4px;
-        background-color: #ffffff;
-        border-radius: 50%;
+      &:hover {
+        background-color: white;
+        color: black;
       }
     }
   }
+}
 
-  .event-details {
-    padding: 30px;
-  }
+.event-icon-container {
+  position: absolute;
+  bottom: -20px;
+  left: 30px;
+}
+
+.event-details {
+  padding: 30px;
 
   .event-title {
     font-size: $font-size-large;
@@ -151,13 +121,50 @@ const toggleMenu = () => {
     margin-top: 14px;
     margin-bottom: 0;
   }
+}
 
-  .event-icon-container {
+.menu-icon {
+  .menu-icon-toggle {
     position: absolute;
-    bottom: -20px;
-    left: 30px;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 4px;
+    height: 16px;
+    cursor: pointer;
 
-    .event-icon {
+    .dot {
+      width: 4px;
+      height: 4px;
+      background-color: #ffffff;
+      border-radius: 50%;
+    }
+  }
+}
+
+.menu {
+  position: absolute;
+  top: 40px;
+  right: 20px;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 8px 0;
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    padding: 8px 16px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #f5f5f5;
     }
   }
 }
