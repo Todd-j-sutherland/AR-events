@@ -4,20 +4,20 @@
       <div class="header-container">
         <h1>Events</h1>
         <div class="actions">
-          <InputText placeholder="Search 9 events..." />
+          <InputText placeholder="Search 9 events..." v-model="searchQuery" @update:modelValue="handleSearch" />
           <Button><span>Create</span> <span class="desktop">new event</span></Button>
         </div>
       </div>
     </header>
     <div class="event-cards">
-      <EventCard v-for="(event, index) in events" :key="event.id" :title="event.title" :date="event.date"
+      <EventCard v-for="(event, index) in filteredEvents" :key="event.id" :title="event.title" :date="event.date"
         :image="event.image" :class="{ 'last-card': index === events.length - 1 }" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import EventCard from '@/components/EventCard.vue'
 import InputText from '@/components/shared/ui/InputText.vue'
 import Button from '@/components/shared/ui/Button.vue'
@@ -28,7 +28,7 @@ interface Event {
   date: string
   image: string
 }
-
+const searchQuery = ref('');
 const events = ref<Event[]>([
   {
     id: 1,
@@ -84,7 +84,20 @@ const events = ref<Event[]>([
     date: 'Melbourne, Sat 29th Jan 2014',
     image: '/src/assets/event-image.png'
   }
-])
+]);
+
+const filteredEvents = computed(() => {
+  if (!searchQuery.value) return events.value
+  const lowercaseQuery = searchQuery.value.toLowerCase()
+  return events.value.filter(event =>
+    event.title.toLowerCase().includes(lowercaseQuery) ||
+    event.date.toLowerCase().includes(lowercaseQuery)
+  )
+})
+
+const handleSearch = (query: string) => {
+  searchQuery.value = query
+}
 </script>
 
 <style scoped lang="scss">

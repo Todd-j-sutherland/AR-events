@@ -2,31 +2,32 @@
     <div class="text-field-container">
         <div class="input-wrapper">
             <SearchIcon class="input-icon" aria-hidden="true" />
-            <input :id="id" :placeholder="placeholder" :type="type" :value="modelValue"
-                @input="$emit('update:modelValue', $event.target?.value)" @focus="isActive = true"
-                @blur="isActive = false" :class="{ 'is-active': isActive }" />
+            <input :id="id" :placeholder="placeholder" :type="type" :value="modelValue" @input="handleInput"
+                @focus="isActive = true" @blur="isActive = false" :class="{ 'is-active': isActive }" </div>
         </div>
-    </div>
 </template>
 
 <script setup lang="ts">
 import { ref, defineProps, defineEmits } from 'vue';
 import SearchIcon from '@/assets/m-glass.svg';
 
-const props = defineProps({
-    id: String,
-    label: String,
-    placeholder: String,
-    type: {
-        type: String,
-        default: 'text'
-    },
-    modelValue: String
-});
+const props = defineProps<{
+    id?: string
+    placeholder?: string
+    type?: string
+    modelValue: string
+}>()
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits<{
+    (e: 'update:modelValue', value: string): void
+}>()
 
 const isActive = ref(false);
+
+const handleInput = (event: Event) => {
+    const target = event.target as HTMLInputElement
+    emit('update:modelValue', target.value)
+}
 </script>
 
 <style scoped lang="scss">
