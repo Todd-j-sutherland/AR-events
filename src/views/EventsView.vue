@@ -4,23 +4,35 @@
       <div class="header-container">
         <h1>Events</h1>
         <div class="actions">
-          <InputText placeholder="Search 9 events..." v-model="searchQuery" @update:modelValue="handleSearch" />
+          <InputText
+            placeholder="Search 9 events..."
+            v-model="searchQuery"
+            @update:modelValue="handleSearch"
+          />
           <Button><span>Create</span> <span class="desktop">new event</span></Button>
         </div>
       </div>
     </header>
-    <div class="event-cards">
-      <EventCard v-for="(event, index) in filteredEvents" :key="event.id" :title="event.title" :date="event.date"
-        :image="event.image" :class="{ 'last-card': index === events.length - 1 }" />
+    <div v-if="filteredEvents.length > 0" class="event-cards">
+      <EventCard
+        v-for="(event, index) in filteredEvents"
+        :key="event.id"
+        :title="event.title"
+        :date="event.date"
+        :image="event.image"
+        :class="{ 'last-card': index === filteredEvents.length - 1 }"
+      />
     </div>
+    <div v-else class="no-results-text">No results</div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import EventCard from '@/components/EventCard.vue'
 import InputText from '@/components/shared/ui/InputText.vue'
 import Button from '@/components/shared/ui/Button.vue'
+import { fetchData } from '../../mock/api'
 
 interface Event {
   id: number
@@ -28,70 +40,27 @@ interface Event {
   date: string
   image: string
 }
-const searchQuery = ref('');
-const events = ref<Event[]>([
-  {
-    id: 1,
-    title: 'Beyond the Valley 2020',
-    date: 'Melbourne, Sat 29th Jan 2020',
-    image: '/src/assets/event-image.png'
-  },
-  {
-    id: 2,
-    title: 'Beyond the Valley 2019 Summer Sessions',
-    date: 'Melbourne, Sat 29th Jan 2019',
-    image: '/src/assets/event-image.png'
-  },
-  {
-    id: 3,
-    title: 'Beyond the Valley 2018 Spring',
-    date: 'Melbourne, Sat 28th Sep 2018',
-    image: '/src/assets/event-image.png'
-  },
-  {
-    id: 4,
-    title: 'Beyond the Valley 2017 Summer',
-    date: 'Melbourne, Sat 29th Nov 2017',
-    image: '/src/assets/event-image.png'
-  },
-  {
-    id: 5,
-    title: 'Beyond the Valley Winter Festival 2017',
-    date: 'Melbourne, Sat 20th Jun 2017',
-    image: '/src/assets/event-image.png'
-  },
-  {
-    id: 6,
-    title: 'Beyond the Valley 2017',
-    date: 'Melbourne, Sat 29th Jan 2017',
-    image: '/src/assets/event-image.png'
-  },
-  {
-    id: 7,
-    title: 'Beyond the Valley 2016',
-    date: 'Melbourne, Sat 29th Jan 2016',
-    image: '/src/assets/event-image.png'
-  },
-  {
-    id: 8,
-    title: 'Beyond the Valley 2015',
-    date: 'Melbourne, Sat 29th Jan 2015',
-    image: '/src/assets/event-image.png'
-  },
-  {
-    id: 9,
-    title: 'Beyond the Valley 2014',
-    date: 'Melbourne, Sat 29th Jan 2014',
-    image: '/src/assets/event-image.png'
+const searchQuery = ref<string>('')
+const isLoading = ref<boolean>(false)
+const events = ref<Event[]>([])
+
+onMounted(async () => {
+  try {
+    events.value = await fetchData()
+  } catch (error) {
+    console.error('Error has occurred:', error)
+  } finally {
+    isLoading.value = false
   }
-]);
+})
 
 const filteredEvents = computed(() => {
   if (!searchQuery.value) return events.value
   const lowercaseQuery = searchQuery.value.toLowerCase()
-  return events.value.filter(event =>
-    event.title.toLowerCase().includes(lowercaseQuery) ||
-    event.date.toLowerCase().includes(lowercaseQuery)
+  return events.value.filter(
+    (event) =>
+      event.title.toLowerCase().includes(lowercaseQuery) ||
+      event.date.toLowerCase().includes(lowercaseQuery)
   )
 })
 
@@ -140,6 +109,12 @@ h1 {
     position: relative;
     left: -213px;
   }
+}
+
+.no-results-text {
+  text-align: center;
+  padding: 30px;
+  font-size: $font-size-large;
 }
 
 @media (max-width: $medium-breakpoint) {
