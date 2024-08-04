@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import EventsView from './views/EventsView.vue'
+import EventsView from './views/EventsView.vue';
 </script>
 
 <template>

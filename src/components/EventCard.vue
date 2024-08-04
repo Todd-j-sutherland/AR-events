@@ -1,12 +1,20 @@
 <template>
-  <div class="event-card" @mouseenter="showHover" @mouseleave="hideHoverAndMenu">
+  <div
+    class="event-card"
+    @mouseenter="showHover"
+    @mouseleave="hideHoverAndMenu"
+  >
     <div class="event-image-container">
       <img :src="image" alt="Event" class="event-image" />
       <div class="hover-overlay">
         <button class="hover-button">View event</button>
       </div>
       <div class="event-icon-container">
-        <img class="event-icon" alt="event icon" src="../assets/event-icon.png" />
+        <img
+          class="event-icon"
+          alt="event icon"
+          src="../assets/event-icon.png"
+        />
       </div>
     </div>
     <div class="event-details">
@@ -36,33 +44,35 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from 'vue';
 
 defineProps<{
-  title: string
-  date: string
-  image: string
-}>()
+  title: string;
+  date: string;
+  image: string;
+}>();
 
-const isHovering = ref(false)
-const isMenuVisible = ref(false)
+const isHovering = ref(false);
+const isMenuVisible = ref(false);
 
-const showHover = () => isHovering.value = true
+const showHover = () => (isHovering.value = true);
 const hideHoverAndMenu = () => {
-  isHovering.value = false
-  isMenuVisible.value = false
-}
+  isHovering.value = false;
+  isMenuVisible.value = false;
+};
 const toggleMenu = (event: Event) => {
-  event.stopPropagation()
-  isMenuVisible.value = !isMenuVisible.value
-}
+  event.stopPropagation();
+  isMenuVisible.value = !isMenuVisible.value;
+};
 </script>
 
 <style scoped lang="scss">
 .event-card {
   max-width: 380px;
   border-radius: 4px;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
   position: relative;
   width: 100%;
 
@@ -103,7 +113,9 @@ const toggleMenu = (event: Event) => {
       padding: 10px 20px;
       font-size: $font-size-medium;
       cursor: pointer;
-      transition: background-color $transition-duration, color $transition-duration;
+      transition:
+        background-color $transition-duration,
+        color $transition-duration;
       border-radius: 3px;
 
       &:hover {
@@ -198,7 +210,7 @@ const toggleMenu = (event: Event) => {
     cursor: pointer;
 
     &:hover {
-      background-color: #F2EDFF;
+      background-color: #f2edff;
       color: $primary-color;
     }
   }

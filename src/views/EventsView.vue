@@ -9,7 +9,9 @@
             v-model="searchQuery"
             @update:modelValue="handleSearch"
           />
-          <Button><span>Create</span> <span class="desktop">new event</span></Button>
+          <Button
+            ><span>Create</span> <span class="desktop">new event</span></Button
+          >
         </div>
       </div>
     </header>
@@ -28,45 +30,45 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
-import EventCard from '@/components/EventCard.vue'
-import InputText from '@/components/shared/ui/InputText.vue'
-import Button from '@/components/shared/ui/Button.vue'
-import { fetchData } from '../../mock/api'
+import { ref, computed, onMounted } from 'vue';
+import EventCard from '@/components/EventCard.vue';
+import InputText from '@/components/shared/ui/InputText.vue';
+import Button from '@/components/shared/ui/Button.vue';
+import { fetchData } from '../../mock/api';
 
 interface Event {
-  id: number
-  title: string
-  date: string
-  image: string
+  id: number;
+  title: string;
+  date: string;
+  image: string;
 }
-const searchQuery = ref<string>('')
-const isLoading = ref<boolean>(false)
-const events = ref<Event[]>([])
+const searchQuery = ref<string>('');
+const isLoading = ref<boolean>(false);
+const events = ref<Event[]>([]);
 
 onMounted(async () => {
   try {
-    events.value = await fetchData()
+    events.value = await fetchData();
   } catch (error) {
-    console.error('Error has occurred:', error)
+    console.error('Error has occurred:', error);
   } finally {
-    isLoading.value = false
+    isLoading.value = false;
   }
-})
+});
 
 const filteredEvents = computed(() => {
-  if (!searchQuery.value) return events.value
-  const lowercaseQuery = searchQuery.value.toLowerCase()
+  if (!searchQuery.value) return events.value;
+  const lowercaseQuery = searchQuery.value.toLowerCase();
   return events.value.filter(
     (event) =>
       event.title.toLowerCase().includes(lowercaseQuery) ||
-      event.date.toLowerCase().includes(lowercaseQuery)
-  )
-})
+      event.date.toLowerCase().includes(lowercaseQuery),
+  );
+});
 
 const handleSearch = (query: string) => {
-  searchQuery.value = query
-}
+  searchQuery.value = query;
+};
 </script>
 
 <style scoped lang="scss">

@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import TargetIcon from '@/assets/circle-cross.svg'
+import TargetIcon from '@/assets/circle-cross.svg';
 </script>
 
 <style scoped lang="scss">
