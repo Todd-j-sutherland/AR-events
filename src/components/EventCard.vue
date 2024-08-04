@@ -6,7 +6,7 @@
         <button class="hover-button">View event</button>
       </div>
       <div class="event-icon-container">
-        <img class="event-icon" alt="event icon" src="./event-icon.png" />
+        <img class="event-icon" alt="event icon" src="../assets/event-icon.png" />
       </div>
     </div>
     <div class="event-details">
@@ -61,7 +61,6 @@ const toggleMenu = (event: Event) => {
 <style scoped lang="scss">
 .event-card {
   max-width: 380px;
-  border: 1px solid #dcdee4;
   border-radius: 4px;
   transition: transform 0.2s, box-shadow 0.2s;
   position: relative;
@@ -89,12 +88,13 @@ const toggleMenu = (event: Event) => {
   .hover-overlay {
     position: absolute;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(31, 40, 68, 0.9);
     display: flex;
     justify-content: center;
     align-items: center;
     opacity: 0;
     transition: opacity $transition-duration ease;
+    border-radius: 4px 4px 0 0;
 
     .hover-button {
       background: none;
@@ -104,6 +104,7 @@ const toggleMenu = (event: Event) => {
       font-size: $font-size-medium;
       cursor: pointer;
       transition: background-color $transition-duration, color $transition-duration;
+      border-radius: 3px;
 
       &:hover {
         background-color: $white;
@@ -128,6 +129,13 @@ const toggleMenu = (event: Event) => {
 
 .event-details {
   padding: 30px;
+  border-top: 0;
+  border-left: 1px;
+  border-right: 1px;
+  border-bottom: 1px;
+  border-style: solid;
+  border-color: $border-color;
+  border-radius: 0 0 4px 4px;
 
   .event-title {
     font-size: $font-size-large;
@@ -209,7 +217,7 @@ const toggleMenu = (event: Event) => {
   width: 10px;
 }
 
-@media (max-width: $small-mobile-breakpoint) {
+@media (max-width: $extra-small-breakpoint) {
   .event-icon-container {
     left: 20px;
     width: 24px;

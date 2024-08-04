@@ -34,55 +34,55 @@ const events = ref<Event[]>([
     id: 1,
     title: 'Beyond the Valley 2020',
     date: 'Melbourne, Sat 29th Jan 2020',
-    image: '/src/assets/event-image.jpg'
+    image: '/src/assets/event-image.png'
   },
   {
     id: 2,
     title: 'Beyond the Valley 2019 Summer Sessions',
     date: 'Melbourne, Sat 29th Jan 2019',
-    image: '/src/assets/event-image.jpg'
+    image: '/src/assets/event-image.png'
   },
   {
     id: 3,
     title: 'Beyond the Valley 2018 Spring',
     date: 'Melbourne, Sat 28th Sep 2018',
-    image: '/src/assets/event-image.jpg'
+    image: '/src/assets/event-image.png'
   },
   {
     id: 4,
     title: 'Beyond the Valley 2017 Summer',
     date: 'Melbourne, Sat 29th Nov 2017',
-    image: '/src/assets/event-image.jpg'
+    image: '/src/assets/event-image.png'
   },
   {
     id: 5,
     title: 'Beyond the Valley Winter Festival 2017',
     date: 'Melbourne, Sat 20th Jun 2017',
-    image: '/src/assets/event-image.jpg'
+    image: '/src/assets/event-image.png'
   },
   {
     id: 6,
     title: 'Beyond the Valley 2017',
     date: 'Melbourne, Sat 29th Jan 2017',
-    image: '/src/assets/event-image.jpg'
+    image: '/src/assets/event-image.png'
   },
   {
     id: 7,
     title: 'Beyond the Valley 2016',
     date: 'Melbourne, Sat 29th Jan 2016',
-    image: '/src/assets/event-image.jpg'
+    image: '/src/assets/event-image.png'
   },
   {
     id: 8,
     title: 'Beyond the Valley 2015',
     date: 'Melbourne, Sat 29th Jan 2015',
-    image: '/src/assets/event-image.jpg'
+    image: '/src/assets/event-image.png'
   },
   {
     id: 9,
     title: 'Beyond the Valley 2014',
     date: 'Melbourne, Sat 29th Jan 2014',
-    image: '/src/assets/event-image.jpg'
+    image: '/src/assets/event-image.png'
   }
 ])
 </script>
@@ -98,7 +98,7 @@ const events = ref<Event[]>([
   justify-content: space-between;
   margin-left: 70px;
   margin-right: 70px;
-  border-bottom: 1px solid #DCDEE4;
+  border-bottom: 1px solid $border-color;
   padding-bottom: 33px;
   padding-top: 42px;
 }
@@ -129,13 +129,13 @@ h1 {
   }
 }
 
-@media (max-width: $mobile-breakpoint) {
+@media (max-width: $medium-breakpoint) {
   .header-container {
     flex-direction: column;
     align-items: flex-start;
     gap: 26px;
-    margin-left: 0;
-    margin-right: 0;
+    margin-left: 30px;
+    margin-right: 30px;
   }
 
   .actions {
@@ -148,7 +148,7 @@ h1 {
   }
 }
 
-@media (max-width: $small-mobile-breakpoint) {
+@media (max-width: $extra-small-breakpoint) {
   .header-container {
     margin-left: 0;
     margin-right: 0;

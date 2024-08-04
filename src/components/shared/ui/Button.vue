@@ -39,7 +39,7 @@ import TargetIcon from '@/assets/circle-cross.svg'
   }
 }
 
-@media (max-width: $mobile-breakpoint) {
+@media (max-width: $medium-breakpoint) {
   .custom-button {
     padding: 10px 48px;
 

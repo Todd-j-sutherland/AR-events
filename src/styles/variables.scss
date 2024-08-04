@@ -7,6 +7,7 @@ $black: #000000;
 $light-gray: #f6f9fc;
 $text-base-color: #43516b;
 $text-color-secondary: #8e97a6;
+$border-color: #dcdee4;
 
 // Typography
 $font-family: 'Graphik', sans-serif;
@@ -19,8 +20,9 @@ $font-weight-medium: 500;
 $font-weight-bold: 700;
 
 // Breakpoints
-$mobile-breakpoint: 768px;
-$small-mobile-breakpoint: 320px;
+$extra-small-breakpoint: 360px;
+$small-breakpoint: 480px;
+$medium-breakpoint: 768px;
 
 // Transitions
 $transition-duration: 0.3s;

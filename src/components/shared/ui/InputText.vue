@@ -63,7 +63,7 @@ input {
     padding-left: 45px;
     font-size: $font-size-medium;
     font-family: $font-family;
-    border: 1px solid #DCDEE4;
+    border: 1px solid $border-color;
     border-radius: 3px;
     transition: border-color $transition-duration, box-shadow $transition-duration;
 
@@ -80,13 +80,13 @@ input {
     }
 }
 
-@media (max-width: $mobile-breakpoint) {
+@media (max-width: $medium-breakpoint) {
     .text-field-container {
         width: 100%;
     }
 }
 
-@media (max-width: $small-mobile-breakpoint) {
+@media (max-width: $extra-small-breakpoint) {
     .input-icon {
         display: none;
     }
