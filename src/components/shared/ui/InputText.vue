@@ -1,6 +1,5 @@
 <template>
     <div class="text-field-container">
-        <label :for="id" class="text-field-label">{{ label }}</label>
         <div class="input-wrapper">
             <SearchIcon class="input-icon" aria-hidden="true" />
             <input :id="id" :placeholder="placeholder" :type="type" :value="modelValue"
@@ -47,6 +46,7 @@ const isActive = ref(false);
     position: relative;
     display: flex;
     align-items: center;
+    margin-right: 10px;
 }
 
 .input-icon {

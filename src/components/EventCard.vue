@@ -1,5 +1,5 @@
 <template>
-  <div class="event-card" @mouseenter="showHover" @mouseleave="hideHover">
+  <div class="event-card" @mouseenter="showHover" @mouseleave="hideHoverAndMenu">
     <div class="event-image-container">
       <img :src="image" alt="Event" class="event-image" />
       <div class="hover-overlay">
@@ -48,8 +48,14 @@ const isHovering = ref(false)
 const isMenuVisible = ref(false)
 
 const showHover = () => isHovering.value = true
-const hideHover = () => isHovering.value = false
-const toggleMenu = () => isMenuVisible.value = !isMenuVisible.value
+const hideHoverAndMenu = () => {
+  isHovering.value = false
+  isMenuVisible.value = false
+}
+const toggleMenu = (event: Event) => {
+  event.stopPropagation()
+  isMenuVisible.value = !isMenuVisible.value
+}
 </script>
 
 <style scoped lang="scss">
@@ -66,8 +72,6 @@ const toggleMenu = () => isMenuVisible.value = !isMenuVisible.value
 
     .hover-overlay {
       opacity: 1;
-      transition: background-color 0.3s, color 0.3s;
-      transition: opacity 0.3s ease;
     }
   }
 }
@@ -89,22 +93,21 @@ const toggleMenu = () => isMenuVisible.value = !isMenuVisible.value
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: background-color 0.3s, color 0.3s, opacity 0.3;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity $transition-duration ease;
 
     .hover-button {
       background: none;
-      border: 1px solid white;
-      color: white;
+      border: 1px solid $white;
+      color: $white;
       padding: 10px 20px;
-      font-size: 16px;
+      font-size: $font-size-medium;
       cursor: pointer;
-      transition: background-color 0.3s, color 0.3s;
+      transition: background-color $transition-duration, color $transition-duration;
 
       &:hover {
-        background-color: white;
-        color: black;
+        background-color: $white;
+        color: $black;
       }
     }
   }
@@ -136,7 +139,7 @@ const toggleMenu = () => isMenuVisible.value = !isMenuVisible.value
 
   .event-date {
     font-size: $font-size-medium;
-    color: #8e97a6;
+    color: $text-color-secondary;
     margin-top: 10px;
     margin-bottom: 0;
   }
@@ -157,7 +160,7 @@ const toggleMenu = () => isMenuVisible.value = !isMenuVisible.value
     .dot {
       width: 4px;
       height: 4px;
-      background-color: #ffffff;
+      background-color: $white;
       border-radius: 50%;
     }
   }
@@ -167,13 +170,14 @@ const toggleMenu = () => isMenuVisible.value = !isMenuVisible.value
   position: absolute;
   top: 60px;
   right: -12px;
-  background-color: white;
+  background-color: $white;
   border-radius: 4px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   padding-top: 15px;
   padding-bottom: 15px;
   width: 205px;
   border: 1px solid #d4d8e1;
+  z-index: 1;
 
   ul {
     list-style-type: none;
@@ -187,13 +191,13 @@ const toggleMenu = () => isMenuVisible.value = !isMenuVisible.value
 
     &:hover {
       background-color: #F2EDFF;
-      color: #7344C0;
+      color: $primary-color;
     }
   }
 }
 
 .triangle {
-  background-color: #ffffff;
+  background-color: $white;
   border-left: 1px solid #d4d8e1;
   border-top: 1px solid #d4d8e1;
   box-sizing: border-box;
@@ -205,7 +209,7 @@ const toggleMenu = () => isMenuVisible.value = !isMenuVisible.value
   width: 10px;
 }
 
-@media (max-width: 320px) {
+@media (max-width: $small-mobile-breakpoint) {
   .event-icon-container {
     left: 20px;
     width: 24px;

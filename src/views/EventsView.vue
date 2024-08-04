@@ -88,13 +88,17 @@ const events = ref<Event[]>([
 </script>
 
 <style scoped lang="scss">
+.events-view {
+  font-family: $font-family;
+}
+
 .header-container {
   display: flex;
-  align-items: baseline;
+  align-items: flex-end;
   justify-content: space-between;
   margin-left: 70px;
   margin-right: 70px;
-  border-bottom: 1px solid #979797;
+  border-bottom: 1px solid #DCDEE4;
   padding-bottom: 33px;
   padding-top: 42px;
 }
@@ -105,10 +109,10 @@ const events = ref<Event[]>([
 }
 
 h1 {
-  font-size: 30px;
+  font-size: $font-size-title;
   line-height: 40px;
   margin: 0;
-  font-weight: normal;
+  font-weight: $font-weight-normal;
 }
 
 .event-cards {
@@ -122,25 +126,10 @@ h1 {
   .last-card {
     position: relative;
     left: -213px;
-
   }
 }
 
-@media (max-width: 768px) {
-  .header-container {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 26px;
-    margin-left: 35px;
-    margin-right: 35px;
-  }
-
-  .actions {
-    width: 100%;
-  }
-}
-
-@media (max-width: 320px) {
+@media (max-width: $mobile-breakpoint) {
   .header-container {
     flex-direction: column;
     align-items: flex-start;
@@ -152,33 +141,30 @@ h1 {
   .actions {
     width: 100%;
   }
-}
 
-@media (max-width: 768px) {
-  .button-icon {
-    display: none;
-  }
-
+  .button-icon,
   .desktop {
     display: none;
   }
 }
 
-@media (max-width: 840px) {
-  .event-cards {
-    .last-card {
-      position: inherit;
+@media (max-width: $small-mobile-breakpoint) {
+  .header-container {
+    margin-left: 0;
+    margin-right: 0;
+    padding-top: 30px;
+  }
+}
 
-    }
+@media (max-width: 840px) {
+  .event-cards .last-card {
+    position: inherit;
   }
 }
 
 @media (min-width: 1266px) {
-  .event-cards {
-    .last-card {
-      position: inherit;
-
-    }
+  .event-cards .last-card {
+    position: inherit;
   }
 }
 </style>
