@@ -5,7 +5,7 @@
             <SearchIcon class="input-icon" aria-hidden="true" />
             <input :id="id" :placeholder="placeholder" :type="type" :value="modelValue"
                 @input="$emit('update:modelValue', $event.target?.value)" @focus="isActive = true"
-                @blur="isActive = false" :class="{ active: isActive }" />
+                @blur="isActive = false" :class="{ 'is-active': isActive }" />
         </div>
     </div>
 </template>
@@ -33,19 +33,20 @@ const isActive = ref(false);
 <style scoped lang="scss">
 .text-field-container {
     display: flex;
+    flex-direction: column;
 }
 
 .text-field-label {
     margin-bottom: 8px;
-    font-size: 14px;
+    font-size: $font-size-base;
     color: #3c3c3c;
+    font-weight: $font-weight-medium;
 }
 
 .input-wrapper {
     position: relative;
     display: flex;
     align-items: center;
-    margin-right: 10px;
 }
 
 .input-icon {
@@ -53,28 +54,25 @@ const isActive = ref(false);
     left: 17px;
     width: 16px;
     height: 16px;
-    fill: #ccc;
+    fill: $text-color-secondary;
 }
 
 input {
+    width: 100%;
     padding: 15px 10px;
-    font-size: 16px;
+    padding-left: 45px;
+    font-size: $font-size-medium;
+    font-family: $font-family;
     border: 1px solid #DCDEE4;
     border-radius: 3px;
-    transition: border-color 0.3s;
-    width: 100%;
-    padding-left: 45px;
+    transition: border-color $transition-duration, box-shadow $transition-duration;
 
     &::placeholder {
         color: #B4B9C4;
-        font-size: 14px;
+        font-size: $font-size-base;
     }
 
-    &.active {
-        border-color: #4caf50;
-        box-shadow: 0px 0px 0px 3px rgba(45, 194, 106, 0.15);
-    }
-
+    &.is-active,
     &:focus {
         outline: none;
         border-color: #4caf50;
@@ -82,13 +80,19 @@ input {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $mobile-breakpoint) {
     .text-field-container {
-        flex-grow: 1;
+        width: 100%;
+    }
+}
+
+@media (max-width: $small-mobile-breakpoint) {
+    .input-icon {
+        display: none;
     }
 
-    .input-wrapper {
-        width: 100%;
+    input {
+        padding-left: 10px;
     }
 }
 </style>

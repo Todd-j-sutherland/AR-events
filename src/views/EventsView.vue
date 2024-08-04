@@ -4,14 +4,14 @@
       <div class="header-container">
         <h1>Events</h1>
         <div class="actions">
-          <!-- <input type="text" placeholder="Search events..." /> -->
           <InputText placeholder="Search 9 events..." />
           <Button><span>Create</span> <span class="desktop">new event</span></Button>
         </div>
       </div>
     </header>
     <div class="event-cards">
-      <EventCard v-for="event in events" :key="event.id" :title="event.title" :date="event.date" :image="event.image" />
+      <EventCard v-for="(event, index) in events" :key="event.id" :title="event.title" :date="event.date"
+        :image="event.image" :class="{ 'last-card': index === events.length - 1 }" />
     </div>
   </div>
 </template>
@@ -34,55 +34,55 @@ const events = ref<Event[]>([
     id: 1,
     title: 'Beyond the Valley 2020',
     date: 'Melbourne, Sat 29th Jan 2020',
-    image: '/src/assets/event-image.png'
+    image: '/src/assets/event-image.jpg'
   },
   {
     id: 2,
     title: 'Beyond the Valley 2019 Summer Sessions',
     date: 'Melbourne, Sat 29th Jan 2019',
-    image: '/src/assets/event-image.png'
+    image: '/src/assets/event-image.jpg'
   },
   {
     id: 3,
     title: 'Beyond the Valley 2018 Spring',
     date: 'Melbourne, Sat 28th Sep 2018',
-    image: '/src/assets/event-image.png'
+    image: '/src/assets/event-image.jpg'
   },
   {
     id: 4,
     title: 'Beyond the Valley 2017 Summer',
     date: 'Melbourne, Sat 29th Nov 2017',
-    image: '/src/assets/event-image.png'
+    image: '/src/assets/event-image.jpg'
   },
   {
     id: 5,
     title: 'Beyond the Valley Winter Festival 2017',
     date: 'Melbourne, Sat 20th Jun 2017',
-    image: '/src/assets/event-image.png'
+    image: '/src/assets/event-image.jpg'
   },
   {
     id: 6,
     title: 'Beyond the Valley 2017',
     date: 'Melbourne, Sat 29th Jan 2017',
-    image: '/src/assets/event-image.png'
+    image: '/src/assets/event-image.jpg'
   },
   {
     id: 7,
     title: 'Beyond the Valley 2016',
     date: 'Melbourne, Sat 29th Jan 2016',
-    image: '/src/assets/event-image.png'
+    image: '/src/assets/event-image.jpg'
   },
   {
     id: 8,
     title: 'Beyond the Valley 2015',
     date: 'Melbourne, Sat 29th Jan 2015',
-    image: '/src/assets/event-image.png'
+    image: '/src/assets/event-image.jpg'
   },
   {
     id: 9,
     title: 'Beyond the Valley 2014',
     date: 'Melbourne, Sat 29th Jan 2014',
-    image: '/src/assets/event-image.png'
+    image: '/src/assets/event-image.jpg'
   }
 ])
 </script>
@@ -102,12 +102,13 @@ const events = ref<Event[]>([
 .actions {
   display: flex;
   align-content: baseline;
-
 }
 
 h1 {
-  font-size: 32px;
+  font-size: 30px;
+  line-height: 40px;
   margin: 0;
+  font-weight: normal;
 }
 
 .event-cards {
@@ -116,7 +117,13 @@ h1 {
   flex-wrap: wrap;
   justify-content: center;
   padding-top: 33px;
-  padding-bottom: 42px
+  padding-bottom: 42px;
+
+  .last-card {
+    position: relative;
+    left: -213px;
+
+  }
 }
 
 @media (max-width: 768px) {
@@ -126,7 +133,20 @@ h1 {
     gap: 26px;
     margin-left: 35px;
     margin-right: 35px;
+  }
 
+  .actions {
+    width: 100%;
+  }
+}
+
+@media (max-width: 320px) {
+  .header-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 26px;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   .actions {
@@ -141,6 +161,24 @@ h1 {
 
   .desktop {
     display: none;
+  }
+}
+
+@media (max-width: 840px) {
+  .event-cards {
+    .last-card {
+      position: inherit;
+
+    }
+  }
+}
+
+@media (min-width: 1266px) {
+  .event-cards {
+    .last-card {
+      position: inherit;
+
+    }
   }
 }
 </style>

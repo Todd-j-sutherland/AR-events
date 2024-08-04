@@ -2,11 +2,11 @@
   <div class="event-card" @mouseenter="showHover" @mouseleave="hideHover">
     <div class="event-image-container">
       <img :src="image" alt="Event" class="event-image" />
-      <div v-if="isHovering" class="hover-overlay">
+      <div class="hover-overlay">
         <button class="hover-button">View event</button>
       </div>
       <div class="event-icon-container">
-        <Icon class="event-icon" />
+        <img class="event-icon" alt="event icon" src="./event-icon.png" />
       </div>
     </div>
     <div class="event-details">
@@ -20,6 +20,9 @@
         <span class="dot"></span>
       </div>
       <div v-if="isMenuVisible" class="menu">
+        <div class="triangle-container">
+          <div class="triangle"></div>
+        </div>
         <ul>
           <li>Create campaign</li>
           <li>Import ticket sales</li>
@@ -34,7 +37,6 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import Icon from './icon.svg'
 
 defineProps<{
   title: string
@@ -52,14 +54,21 @@ const toggleMenu = () => isMenuVisible.value = !isMenuVisible.value
 
 <style scoped lang="scss">
 .event-card {
-  width: 380px;
+  max-width: 380px;
   border: 1px solid #dcdee4;
   border-radius: 4px;
   transition: transform 0.2s, box-shadow 0.2s;
   position: relative;
+  width: 100%;
 
   &:hover {
     box-shadow: 2px 0px 40px 0px rgba(0, 0, 0, 0.2);
+
+    .hover-overlay {
+      opacity: 1;
+      transition: background-color 0.3s, color 0.3s;
+      transition: opacity 0.3s ease;
+    }
   }
 }
 
@@ -76,10 +85,13 @@ const toggleMenu = () => isMenuVisible.value = !isMenuVisible.value
   .hover-overlay {
     position: absolute;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 0.8);
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: background-color 0.3s, color 0.3s, opacity 0.3;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 
     .hover-button {
       background: none;
@@ -102,6 +114,13 @@ const toggleMenu = () => isMenuVisible.value = !isMenuVisible.value
   position: absolute;
   bottom: -20px;
   left: 30px;
+  width: 30px;
+  height: 30px;
+
+  .event-icon {
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .event-details {
@@ -118,7 +137,7 @@ const toggleMenu = () => isMenuVisible.value = !isMenuVisible.value
   .event-date {
     font-size: $font-size-medium;
     color: #8e97a6;
-    margin-top: 14px;
+    margin-top: 10px;
     margin-bottom: 0;
   }
 }
@@ -146,12 +165,15 @@ const toggleMenu = () => isMenuVisible.value = !isMenuVisible.value
 
 .menu {
   position: absolute;
-  top: 40px;
-  right: 20px;
+  top: 60px;
+  right: -12px;
   background-color: white;
   border-radius: 4px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 8px 0;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  width: 205px;
+  border: 1px solid #d4d8e1;
 
   ul {
     list-style-type: none;
@@ -160,12 +182,44 @@ const toggleMenu = () => isMenuVisible.value = !isMenuVisible.value
   }
 
   li {
-    padding: 8px 16px;
+    padding: 13px 20px;
     cursor: pointer;
 
     &:hover {
-      background-color: #f5f5f5;
+      background-color: #F2EDFF;
+      color: #7344C0;
     }
+  }
+}
+
+.triangle {
+  background-color: #ffffff;
+  border-left: 1px solid #d4d8e1;
+  border-top: 1px solid #d4d8e1;
+  box-sizing: border-box;
+  height: 10px;
+  position: absolute;
+  right: 29px;
+  top: -6px;
+  transform: rotate(45deg);
+  width: 10px;
+}
+
+@media (max-width: 320px) {
+  .event-icon-container {
+    left: 20px;
+    width: 24px;
+    height: 24px;
+    bottom: -12px;
+
+    .event-icon {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .event-details {
+    padding: 20px;
   }
 }
 </style>
