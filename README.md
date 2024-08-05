@@ -1,64 +1,38 @@
-# audience-repulic-events
+# Project overview
 
-This template should help get you started developing with Vue 3 in Vite.
+- The main goal of this application is to implement the provided design in a consistent and responsive way.
+- I exported assets from Sketch such as the card's image and icon.
+- I went through and gathered the required colours as well as the font sizes and weights.
+- when it came to the spacing I used the provided design and calculated the spacing between the elements, which I attempted to match as closely as possible.
+- each card has a clickable menu button that opens a dropdown menu with options.
+- I found that aligning the cards in the centre of the page was a good approach though it does have it drawbacks which I had to add a manual override for the last card.
+- The page is responsive and works well on mobile devices.
 
-## Recommended IDE Setup
+## Extra features
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- The page shows a loading spinner while the data is being fetched (mocked data).
+- if there's an error fetching the data a message is displayed to the user.
+- input field filters cards
+- can create a new card via a create button which opens a modal with a form.
+- unit tests and E2E tests are included.
 
-## Type Support for `.vue` Imports in TS
+## Technologies used
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+Vue.js, HTML, CSS, JavaScript
+I didn't see the need to use VUEX or VUE router as the application is quite simple and doesn't require any state management or routing.
 
-## Customize configuration
+## Improvements
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+- I would have liked to add a feature that allows the user to edit the card's details.
+- I would have liked to add a feature that allows the user to delete a card.
+- I would have liked to add a feature that allows the user to reorder/sort the cards.
+- View the card's details in a separate page.
 
-## Project Setup
+## How to run the project
 
-```sh
+```
 npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
 npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
 npm run test:unit
-```
-
-### Run End-to-End Tests with [Playwright](https://playwright.dev)
-
-```sh
-# Install browsers for the first run
-npx playwright install
-
-# When testing on CI, must build the project first
-npm run build
-
-# Runs the end-to-end tests
 npm run test:e2e
-# Runs the tests only on Chromium
-npm run test:e2e -- --project=chromium
-# Runs the tests of a specific file
-npm run test:e2e -- tests/example.spec.ts
-# Runs the tests in debug mode
-npm run test:e2e -- --debug
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
 ```
