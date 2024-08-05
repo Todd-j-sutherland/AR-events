@@ -1,20 +1,12 @@
 <template>
-  <div
-    class="event-card"
-    @mouseenter="showHover"
-    @mouseleave="hideHoverAndMenu"
-  >
+  <div class="event-card" @mouseenter="showHover" @mouseleave="hideHoverAndMenu">
     <div class="event-image-container">
       <img :src="image" alt="Event" class="event-image" />
       <div class="hover-overlay">
         <button class="hover-button">View event</button>
       </div>
       <div class="event-icon-container">
-        <img
-          class="event-icon"
-          alt="event icon"
-          src="../assets/event-icon.png"
-        />
+        <img class="event-icon" alt="event icon" src="../assets/event-icon.png" />
       </div>
     </div>
     <div class="event-details">
@@ -128,7 +120,7 @@ const toggleMenu = (event: Event) => {
 
 .event-icon-container {
   position: absolute;
-  bottom: -20px;
+  bottom: -15px;
   left: 30px;
   width: 30px;
   height: 30px;
