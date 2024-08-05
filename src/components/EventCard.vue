@@ -1,17 +1,25 @@
 <template>
-  <div class="event-card" @mouseenter="showHover" @mouseleave="hideHoverAndMenu">
+  <div
+    class="event-card"
+    @mouseenter="showHover"
+    @mouseleave="hideHoverAndMenu"
+  >
     <div class="event-image-container">
       <img :src="image" alt="Event" class="event-image" />
       <div class="hover-overlay">
         <button class="hover-button">View event</button>
       </div>
       <div class="event-icon-container">
-        <img class="event-icon" alt="event icon" src="../assets/event-icon.png" />
+        <img
+          class="event-icon"
+          alt="event icon"
+          src="../assets/images/event-icon.png"
+        />
       </div>
     </div>
     <div class="event-details">
       <div class="event-title">{{ title }}</div>
-      <p class="event-date">{{ date }}</p>
+      <p class="event-date">{{ `${location}, ${date}` }}</p>
     </div>
     <div class="menu-icon">
       <div class="menu-icon-toggle" @click="toggleMenu">
@@ -41,6 +49,7 @@ import { ref } from 'vue';
 defineProps<{
   title: string;
   date: string;
+  location: string;
   image: string;
 }>();
 

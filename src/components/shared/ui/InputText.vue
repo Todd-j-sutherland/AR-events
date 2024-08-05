@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
 import { ref, defineProps, defineEmits } from 'vue';
-import SearchIcon from '@/assets/m-glass.svg';
+import SearchIcon from '@/assets/images/m-glass.svg';
 
 const props = defineProps<{
   id?: string;
