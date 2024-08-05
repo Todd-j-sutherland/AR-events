@@ -9,7 +9,7 @@
             v-model="searchQuery"
             @update:modelValue="handleSearch"
           />
-          <Button>
+          <Button @click="openModal">
             <span>Create</span> <span class="desktop">new event</span>
           </Button>
         </div>
@@ -29,6 +29,25 @@
     <LoadingSpinner v-else-if="isLoading" />
     <div v-else class="no-results-text">No results</div>
     <Toast v-if="isError" isError :message="errorMessage" />
+
+    <Modal :isOpen="isModalOpen" @close="closeModal">
+      <h2 class="modal-title">Create New Event</h2>
+      <form @submit.prevent="saveEvent" class="event-form">
+        <div class="form-group">
+          <label for="title">Title:</label>
+          <input id="title" v-model="newEvent.title" required />
+        </div>
+        <div class="form-group">
+          <label for="date">Date:</label>
+          <input id="date" v-model="newEvent.date" type="date" required />
+        </div>
+        <div class="form-group">
+          <label for="location">Location:</label>
+          <input id="location" v-model="newEvent.location" required />
+        </div>
+        <Button type="submit" class="save-button">Save Event</Button>
+      </form>
+    </Modal>
   </div>
 </template>
 
@@ -38,7 +57,9 @@ import EventCard from '@/components/EventCard.vue';
 import InputText from '@/components/shared/InputText.vue';
 import Button from '@/components/shared/Button.vue';
 import LoadingSpinner from '@/components/shared/LoadingSpinner.vue';
+import Modal from '@/components/shared/Modal.vue';
 import { fetchData } from '../../mock/api';
+import { formatDate } from '@/utils/index';
 import Toast from '@/components/shared/Toast.vue';
 
 interface Event {
@@ -48,11 +69,20 @@ interface Event {
   location: string;
   image: string;
 }
+
 const searchQuery = ref<string>('');
 const isLoading = ref<boolean>(false);
 const events = ref<Event[]>([]);
 const isError = ref<boolean>(false);
 const errorMessage = ref<string>('');
+const isModalOpen = ref<boolean>(false);
+const newEvent = ref<Event>({
+  id: 0,
+  title: '',
+  date: '',
+  location: '',
+  image: '/src/assets/images/event-image.png',
+});
 
 onMounted(async () => {
   isLoading.value = true;
@@ -60,7 +90,7 @@ onMounted(async () => {
     events.value = await fetchData();
   } catch (error) {
     isError.value = true;
-    (errorMessage.value = 'Error has occurred:'), error;
+    errorMessage.value = 'Error has occurred:' + error;
     console.error('Error has occurred:', error);
   } finally {
     isLoading.value = false;
@@ -81,6 +111,33 @@ const filteredEvents = computed(() => {
 
 const handleSearch = (query: string) => {
   searchQuery.value = query;
+};
+
+const openModal = () => {
+  isModalOpen.value = true;
+};
+
+const closeModal = () => {
+  isModalOpen.value = false;
+  newEvent.value = {
+    title: '',
+    date: '',
+    location: '',
+    image: '/src/assets/images/event-image.png',
+    id: 0,
+  };
+};
+
+const saveEvent = () => {
+  const formattedDate = formatDate(newEvent.value.date);
+
+  const event: Event = {
+    ...newEvent.value,
+    id: Date.now(),
+    date: formattedDate,
+  };
+  events.value.push(event);
+  closeModal();
 };
 </script>
 
@@ -168,6 +225,48 @@ h1 {
 @media (min-width: 1266px) {
   .event-cards .last-card {
     position: inherit;
+  }
+}
+
+.modal-title {
+  font-size: $font-size-title;
+  color: $primary-color;
+  margin-top: 0;
+}
+
+.event-form {
+  .form-group {
+    margin-bottom: 15px;
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: $font-weight-medium;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid $border-color;
+      border-radius: 4px;
+      font-size: $font-size-medium;
+      font-family: $font-family;
+    }
+  }
+
+  .save-button {
+    margin-top: 20px;
+    width: 100%;
+  }
+}
+
+@media (max-width: $medium-breakpoint) {
+  .event-form {
+    .form-group {
+      input {
+        font-size: $font-size-base;
+      }
+    }
   }
 }
 </style>
