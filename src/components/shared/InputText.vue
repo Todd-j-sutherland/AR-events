@@ -2,22 +2,14 @@
   <div class="text-field-container">
     <div class="input-wrapper">
       <SearchIcon class="input-icon" aria-hidden="true" />
-      <input
-        :id="id"
-        :placeholder="placeholder"
-        :type="type"
-        :value="modelValue"
-        @input="handleInput"
-        @focus="isActive = true"
-        @blur="isActive = false"
-        :class="{ 'is-active': isActive }"
-      />
+      <input :placeholder="placeholder" :type="type" :value="modelValue" @input="handleInput" @focus="isActive = true"
+        @blur="isActive = false" :class="{ 'is-active': isActive }" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, defineProps, defineEmits } from 'vue';
+import { ref } from 'vue';
 import SearchIcon from '@/assets/images/m-glass.svg';
 
 const props = defineProps<{

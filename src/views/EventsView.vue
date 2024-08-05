@@ -4,11 +4,7 @@
       <div class="header-container">
         <h1>Events</h1>
         <div class="actions">
-          <InputText
-            placeholder="Search 9 events..."
-            v-model="searchQuery"
-            @update:modelValue="handleSearch"
-          />
+          <InputText placeholder="Search 9 events..." v-model="searchQuery" @update:modelValue="handleSearch" />
           <Button>
             <span>Create</span> <span class="desktop">new event</span>
           </Button>
@@ -16,15 +12,8 @@
       </div>
     </header>
     <div v-if="filteredEvents && filteredEvents.length > 0" class="event-cards">
-      <EventCard
-        v-for="(event, index) in filteredEvents"
-        :key="event.id"
-        :title="event.title"
-        :date="event.date"
-        :location="event.location"
-        :image="event.image"
-        :class="{ 'last-card': index === filteredEvents.length - 1 }"
-      />
+      <EventCard v-for="(event, index) in filteredEvents" :key="event.id" :title="event.title" :date="event.date"
+        :location="event.location" :image="event.image" :class="{ 'last-card': index === filteredEvents.length - 1 }" />
     </div>
     <LoadingSpinner v-else-if="isLoading" />
     <div v-else class="no-results-text">No results</div>
@@ -35,11 +24,11 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
 import EventCard from '@/components/EventCard.vue';
-import InputText from '@/components/shared/ui/InputText.vue';
-import Button from '@/components/shared/ui/Button.vue';
-import LoadingSpinner from '@/components/shared/ui/LoadingSpinner.vue';
+import InputText from '@/components/shared/InputText.vue';
+import Button from '@/components/shared/Button.vue';
+import LoadingSpinner from '@/components/shared/LoadingSpinner.vue';
 import { fetchData } from '../../mock/api';
-import Toast from '@/components/shared/ui/Toast.vue';
+import Toast from '@/components/shared/Toast.vue';
 
 interface Event {
   id: number;
