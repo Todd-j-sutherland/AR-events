@@ -2,8 +2,15 @@
   <div class="text-field-container">
     <div class="input-wrapper">
       <SearchIcon class="input-icon" aria-hidden="true" />
-      <input :placeholder="placeholder" :type="type" :value="modelValue" @input="handleInput" @focus="isActive = true"
-        @blur="isActive = false" :class="{ 'is-active': isActive }" />
+      <input
+        :placeholder="placeholder"
+        :type="type"
+        :value="modelValue"
+        @input="handleInput"
+        @focus="isActive = true"
+        @blur="isActive = false"
+        :class="{ 'is-active': isActive }"
+      />
     </div>
   </div>
 </template>
